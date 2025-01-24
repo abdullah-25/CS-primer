@@ -21,8 +21,10 @@ class Vector(object):
         return math.sqrt(a)
 
 
-
-
+class displacement(Vector):
+    def displacement(self, velocity, time):
+        self.x = self.x * velocity * time
+        self.y = self.y * velocity * time
 
 
 
@@ -41,9 +43,11 @@ if __name__ == '__main__':
     v5 = Vector(3,4)
     length = v5.magnetitude()  # Should be 5
 
-    print(v3.show())
-    print(is_equal1, is_equal2)
-    print(length)
+    d = displacement(2,3)
+    d.displacement(2,3)
 
-    # assert v1.add(v2)
-    # assert v1.add(v2).equals(v3(4,3))
+    is_equal = d.comparison(Vector(3,5))
+
+    print(v3.show())
+    print(is_equal1, is_equal2, is_equal)
+    print(length)
