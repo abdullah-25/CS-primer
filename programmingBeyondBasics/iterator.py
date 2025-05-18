@@ -15,36 +15,47 @@ objective of this excercise is to build that interface from scratch
 
 """
 class MyRange:
+    """
+    Custom implementation of Python's range function.
+    
+    This class mimics the functionality of the built-in range() function,
+    providing a way to iterate through a sequence of numbers from 0 to end-1.
+    """
     def __init__(self, end):
         self.n = 0
         self.end = end
-    
+
     def __iter__(self):
         return self
-    
+
     def __next__(self):
         if self.n == self.end:
             raise StopIteration
-        iter = self.n
+        current = self.n
         self.n += 1
-        return iter
-    
+        return current
+
     def __reversed__(self):
         class Reversed:
-            def __init__(self,start, end):
+            """
+            Nested class that provides reversed iteration functionality.
+            
+            This class allows MyRange to be used with the reversed() built-in function.
+            """
+            def __init__(self, start, end):
                 self.n = end - 1
                 self.start = start
-            
+
             def __iter__(self):
                 return self
-            
+
             def __next__(self):
                 if self.n < self.start:
                     raise StopIteration
-                iter = self.n
+                current = self.n
                 self.n -= 1
-                return iter
-        
+                return current
+
         return Reversed(0, self.end)
 
 
