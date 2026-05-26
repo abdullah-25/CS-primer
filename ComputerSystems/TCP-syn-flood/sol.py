@@ -42,7 +42,6 @@ def syn_flood(file: PcapPath):
 
 def main():
     result = syn_flood('syn-flood/synflood.pcap')
-    print(result)
 
 if __name__ == '__main__':
     main()
