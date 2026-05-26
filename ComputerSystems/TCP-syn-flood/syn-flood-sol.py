@@ -1,9 +1,7 @@
 import struct
 from pylibpcap.pcap import rpcap
 
-PcapPath = str  # path to a .pcap capture file
-
-def syn_flood(file: PcapPath):
+def syn_flood(file):
     """
     per-file header is 24 bytes
     - first byte is 4 byte magic number 0xa1b2c3d4
@@ -23,10 +21,12 @@ def syn_flood(file: PcapPath):
     - count how many packets sent by server  containing  SYN/ACK
     - total SYN/ACK packets sent by server / total syn packets received by server + 100
     """
+    
     SYN=0x02
     ACK=0x10
     total_syn_packets_received = 0
     total_syn_ack_packets_sent = 0
+    
     header = rpcap(file)
     for length, timestamp, data in header:
         tcp_header = struct.unpack('!HHLLBBHHH', data[24:44])
@@ -42,7 +42,7 @@ def syn_flood(file: PcapPath):
 
 def main():
     result = syn_flood('syn-flood/synflood.pcap')
-
+    
 if __name__ == '__main__':
     main()
 
