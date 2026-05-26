@@ -25,7 +25,6 @@ def decoder(message):
         byte = byte & 0b01111111
         n = n | byte
     return n
-    
  
 
 if __name__ == "__main__":
